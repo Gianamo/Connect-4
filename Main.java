@@ -78,9 +78,5 @@ public class Main
         {
             System.out.println("Yellow Wins");
         }
-        else
-        {
-            System.out.println("You broke it");
-        }
     }
 }
