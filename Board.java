@@ -31,7 +31,7 @@ public class Board extends JFrame
     public boolean dropPiece(int turn, int col)
     {
         int temp = 3;
-        int i = 7;
+        int i = 6;
         if(isMoveValid(col))
         {
             while(temp != 0)
@@ -152,7 +152,7 @@ public class Board extends JFrame
         {
             if(board[row + i][col + i].getColor() == turn)
             {
-                hor++;
+                backslash++;
                 i++;
             }
             else
@@ -166,7 +166,7 @@ public class Board extends JFrame
         {
             if(board[row + i][col + i].getColor() == turn)
             {
-                hor++;
+                backslash++;
                 i--;
             }
             else

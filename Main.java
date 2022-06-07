@@ -18,7 +18,7 @@ public class Main
 
     public static void main(String[] args)
     {
-        game.setSize(600,700);
+        game.setSize(700,700);
         game.setResizable(false);
         game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -43,6 +43,11 @@ public class Main
      */
     public static void move(int column)
     {
+        if(gameWon != 0)
+        {
+            return;
+        }
+        
         boolean valid = game.dropPiece(turn, column);
         if(!valid)
         {
@@ -58,7 +63,6 @@ public class Main
             turn = 1;
         }
         
-        gameWinner(turn, selectedSquare.getRow(), selectedSquare.getCol());
         gameWin(gameWon);
         
         printCurrentTurn();

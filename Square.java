@@ -60,15 +60,12 @@ public class Square extends JPanel
         @Override
         public void mousePressed(MouseEvent e)
         {
-            Main.move(selectedColumn);
-        }
-        
-        @Override
-        public void mouseMoved(MouseEvent e)
-        {
             Square selectedSquare = (Square) e.getSource();
             selectedColumn = selectedSquare.getCol();
             Main.selectedSquare = selectedSquare;
+            
+            Main.move(selectedColumn);
         }
+        
     }
 } 
