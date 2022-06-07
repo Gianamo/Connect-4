@@ -11,24 +11,22 @@ import java.awt.event.*;
 public class Main
 {
     public static int turn = 1;
-
-    static Square startSquare = null;
-    static Square endSquare = null;
+    public static int gameWon = 0;
+    
+    public static Square selectedSquare = null;
     static Board game = new Board();
 
     public static void main(String[] args)
     {
-        game.setSize(800,800);
+        game.setSize(600,700);
         game.setResizable(false);
         game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        int gameWon = 0;
-        boolean valid;
-
         game.setVisible(true);
+        printCurrentTurn();
     }
 
-    public static void startRound()
+    public static void printCurrentTurn()
     {
         if(turn == 1)
         {
@@ -36,41 +34,34 @@ public class Main
         }
         else if(turn == 2)
         {
-            System.out.println("Black's Turn");
+            System.out.println("Yellow's Turn");
         }
     }
 
     /**
      * Precondition: startSquare and endSquare must not be null
      */
-    public static void move()
+    public static void move(int column)
     {
-        boolean move = game.move(turn, startSquare.getRow(),startSquare.getCol(),endSquare.getRow(),endSquare.getCol());
-
-        if(!move) 
+        boolean valid = game.dropPiece(turn, column);
+        if(!valid)
         {
-            endSquare = null;
-            startSquare = null;
-            return;  
+            return;
         }
         
         if(turn == 1)
         {
             turn = 2;
         }
-        else if(turn == 2)
+        else
         {
             turn = 1;
         }
         
-        int gameWon = game.gameWinner();
+        gameWinner(turn, selectedSquare.getRow(), selectedSquare.getCol());
+        gameWin(gameWon);
         
-        if(gameWon > 0) 
-        {
-            gameWin(gameWon);
-        }
-        endSquare = null;
-        startSquare = null;
+        printCurrentTurn();
     }
     
     public static void gameWin(int gameStatus) 
@@ -81,7 +72,7 @@ public class Main
         }
         else if (gameStatus == 2)
         {
-            System.out.println("Black Wins");
+            System.out.println("Yellow Wins");
         }
         else
         {

@@ -14,27 +14,19 @@ public class Piece extends JPanel
     private JPanel redPiece = new JPanel();
     private JLabel redPieceIcon = new JLabel();
     
-    private JPanel redKing = new JPanel();
-    private JLabel redKingIcon = new JLabel();
-    
-    private JPanel blackPiece = new JPanel();
-    private JLabel blackPieceIcon = new JLabel();
-    
-    private JPanel blackKing = new JPanel();
-    private JLabel blackKingIcon = new JLabel();
+    private JPanel yellowPiece = new JPanel();
+    private JLabel yellowPieceIcon = new JLabel();
     
     private JPanel noPiece = new JPanel();
+    private JLabel noPieceIcon = new JLabel();
     
     private CardLayout cards = new CardLayout();
     
-    private int r;
     private int c;
-    private boolean v;
-    public Piece(int rank, int color, boolean valid)
+
+    public Piece(int color)
     {
-       r = rank;
        c = color;
-       v= valid;
        setOpaque(false);
        setLayout(cards);
        
@@ -42,80 +34,40 @@ public class Piece extends JPanel
        redPiece.add(redPieceIcon);
        redPieceIcon.setIcon(new ImageIcon("RedPiece.png"));
        
-       redKing.setOpaque(false);
-       redKing.add(redKingIcon);
-       redKingIcon.setIcon(new ImageIcon("RedKing.png"));
-       
-       blackPiece.setOpaque(false);
-       blackPiece.add(blackPieceIcon);
-       blackPieceIcon.setIcon(new ImageIcon("BlackPiece.png"));
-       
-       blackKing.setOpaque(false);
-       blackKing.add(blackKingIcon);
-       blackKingIcon.setIcon(new ImageIcon("BlackKing.png"));
+       yellowPiece.setOpaque(false);
+       yellowPiece.add(yellowPieceIcon);
+       yellowPieceIcon.setIcon(new ImageIcon("YellowPiece.png"));
        
        noPiece.setOpaque(false);
+       noPiece.add(noPieceIcon);
+       noPieceIcon.setIcon(new ImageIcon("NoPiece.png"));
        
        this.add(redPiece, "Red");
-       this.add(blackPiece, "Black");
-       this.add(redKing, "RedKing");
-       this.add(blackKing, "BlackKing");
+       this.add(yellowPiece, "Yellow");
        this.add(noPiece, "None");
         
        updatePiece();
     }
-    public Piece()
-    {
-        
-    }
     
-    public int getRank() {
-        return r;
-    }
     public int getColor() {
         return c;
     }
-    
-    public void setRank(int r) {
-        this.r = r;
-    }
+   
     public void setColor(int c) {
         this.c = c;
+        updatePiece();
     }
-    
-    public void setBRnC(int rank, int color)
-    {
-        r = rank;
-        c = color;
-        
-    }
+
     
     public void updatePiece()
     {
-        if(r >= 1 && v) 
+       if(c == 1)
        {
-           if(c == 1) 
-           {
-               if(r > 1)
-               {
-                   cards.show(this, "RedKing");
-               }
-               else
-               {
-                   cards.show(this, "Red");
-               }
-           }
-           else
-           {
-               if(r > 1)
-               {
-                   cards.show(this, "BlackKing");
-               }
-               else
-               {
-                   cards.show(this, "Black");
-               }
-           }
+           cards.show(this, "Red");
+       }
+       else if (c == 2)
+       {
+           cards.show(this, "Yellow");
        }
        else
        {
